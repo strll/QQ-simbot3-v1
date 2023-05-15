@@ -18,6 +18,7 @@ import xyz.cssxsh.mirai.tool.FixProtocolVersion;
 public class Application {
     public static void main(String[] args) {
         FixProtocolVersion.update();
+
         SpringApplication.run(Application.class, args);
     }
 }

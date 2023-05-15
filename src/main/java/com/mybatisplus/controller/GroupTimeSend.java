@@ -129,13 +129,8 @@ public class GroupTimeSend {
                 }
                 groupMessageEvent.getSource().sendBlocking("早上好,这是历史上的今天");
                 // 发送消息
-                int x=0;
-                try {
-                    x=(int)(Math.random()*20000+1);
-                    wait(x);
-                } catch (InterruptedException e) {
-                    e.printStackTrace();
-                }
+
+
                 groupMessageEvent.getSource().sendAsync( miraiForwardMessageBuilder.build());
             }
         }
@@ -149,13 +144,8 @@ public class GroupTimeSend {
             for (MyGroupMessageEvent_TimeSend event :  hashset) {
                 GroupMessageEvent groupMessageEvent = event.getGroupMessageEvent();
                 MessagesBuilder moyu = this.moyu.getMoyu();
-                int x=0;
-                try {
-                    x=(int)(Math.random()*20000+1);
-                    wait(x);
-                } catch (InterruptedException e) {
-                    e.printStackTrace();
-                }
+
+
                 groupMessageEvent.getSource().sendAsync(moyu.build());
             }
 
@@ -173,12 +163,7 @@ public class GroupTimeSend {
                 GroupMessageEvent groupMessageEvent = event.getGroupMessageEvent();
                 MiraiForwardMessageBuilder miraiForwardMessageBuilder = getNews.EveryDayNews(groupMessageEvent);
                 int x=0;
-                try {
-                    x=(int)(Math.random()*20000+1);
-                    wait(x);
-                } catch (InterruptedException e) {
-                    e.printStackTrace();
-                }
+
                 groupMessageEvent.getSource().sendAsync(miraiForwardMessageBuilder.build());
             }
 
@@ -196,15 +181,7 @@ public class GroupTimeSend {
 
             for (MyGroupMessageEvent_TimeSend event :  hashset) {
                 GroupMessageEvent groupMessageEvent = event.getGroupMessageEvent();
-                int x=0;
-                try {
-                    x=(int)(Math.random()*20000+1);
-                    wait(x);
-                } catch (InterruptedException e) {
-                    e.printStackTrace();
-                }
                 groupMessageEvent.getSource().sendAsync("早上好 这是本周的动漫资讯");
-
                 MiraiForwardMessageBuilder miraiForwardMessageBuilder=new MiraiForwardMessageBuilder();
                 var messagesBuilder = new MessagesBuilder();
                 for (String s : ends) {
