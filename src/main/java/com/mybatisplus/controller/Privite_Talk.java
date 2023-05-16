@@ -10,6 +10,8 @@ import com.mybatisplus.utils.MyRedis;
 import love.forte.simboot.annotation.Filter;
 import love.forte.simboot.annotation.Listener;
 import love.forte.simboot.filter.MatchType;
+import love.forte.simbot.ID;
+import love.forte.simbot.component.mirai.event.MiraiFriendEvent;
 import love.forte.simbot.event.ContinuousSessionContext;
 import love.forte.simbot.event.FriendMessageEvent;
 import love.forte.simbot.event.GroupMessageEvent;
@@ -39,7 +41,7 @@ public class Privite_Talk {
 
 
     @Listener
-    public void openAi(FriendMessageEvent event, ContinuousSessionContext sessionContext) throws Exception {
+    public void openAi(FriendMessageEvent event, ContinuousSessionContext sessionContext,MiraiFriendEvent miraiFriendEvent) throws Exception {
 
             String next = new Scanner(event.getMessageContent().getPlainText()).next();
             if (next.equals("设置生理期")){
@@ -84,6 +86,7 @@ public class Privite_Talk {
             Girl thisgirl = JSONUtil.toBean(jsonObject, Girl.class);
             HashMap<FriendMessageEvent, String> hashMap = thisgirl.getHashMap();
             for (FriendMessageEvent friendMessageEvent : hashMap.keySet()) {
+
                 String s1 = hashMap.get(friendMessageEvent);
                   if(is(s1))  {
                      friendMessageEvent.replyBlocking("今天可能是您的生理期(生理期按照30天为一个周期进行计算)");

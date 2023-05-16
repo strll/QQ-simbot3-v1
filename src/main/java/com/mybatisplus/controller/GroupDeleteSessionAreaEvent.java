@@ -1,9 +1,11 @@
 package com.mybatisplus.controller;
 
 
+import com.mybatisplus.entity.Admin;
 import com.mybatisplus.entity.Message;
 import com.mybatisplus.service.IAdminService;
 import com.mybatisplus.service.IMessageService;
+import com.mybatisplus.service.impl.AdminServiceImpl;
 import com.mybatisplus.utils.MyRedis;
 import love.forte.simboot.annotation.Filter;
 import love.forte.simboot.annotation.Listener;
@@ -105,22 +107,22 @@ public class GroupDeleteSessionAreaEvent implements ApplicationRunner {
                         c.replyAsync("超时啦");
                     }
                     Messages messages = c.getMessageContent().getMessages();
+                    Admin admin_permission = adminService.get_Admin_permission(accountCode);
                     for (love.forte.simbot.message.Message.Element<?> element : messages) {
                         if (element instanceof Text) {
                             String text = ((Text) element).getText();
                             List<String> strings = service.Get_QQ_by_key(text); //根据要删除的内容返回这个key所有的qq号
+
                             int size = strings.size();
                             if (size != 0) {
                                 for (String string : strings) {
                                     //如果这个qq号和触发这个函数的QQ号相同并且权限满足
-                                    if (string.equals(c.getAuthor().getId().toString())) {
+                                    if (string.equals(c.getAuthor().getId().toString())||admin_permission.getPermission().equals("0")) {
                                         int i = 0;
                                         int b = 0;
                                         i = service.DeleteMessage(text);
                                         if (b + i == 0) {
                                             c.replyAsync("删除失败");
-
-
                                         } else {
                                             c.replyAsync("删除成功");
                                         }
